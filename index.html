@@ -1,0 +1,2630 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="pastel-light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>English Story App</title>
+  <meta name="description" content="Aesthetic offline-first PWA for reading English teen stories with interactive vocabulary and quizzes." />
+  <meta property="og:title" content="English Story App" />
+  <meta property="og:description" content="Aesthetic offline-first PWA for reading English teen stories with interactive vocabulary and quizzes." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#7C5CFC" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="StoryApp" />
+
+  <!-- Inline PWA Manifest via Data URI -->
+  <link rel="manifest" href="data:application/manifest+json;utf-8,%7B%22name%22%3A%22English%20Story%20App%22%2C%22short_name%22%3A%22StoryApp%22%2C%22description%22%3A%22Aesthetic%20offline-first%20English%20story%20reader%20for%20teens%20with%20interactive%20vocabulary%20and%20quizzes%22%2C%22start_url%22%3A%22.%22%2C%22scope%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23F7F5FB%22%2C%22theme_color%22%3A%22%237C5CFC%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27128%27%20fill%3D%27%237C5CFC%27%2F%3E%3Cpath%20d%3D%27M128%20140c36-12%2080-12%20128%2016v200c-48-28-92-28-128-16zm256%200c-36-12-80-12-128%2016v200c48-28%2092-28%20128-16z%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%2732%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3Ccircle%20cx%3D%27256%27%20cy%3D%27110%27%20r%3D%2718%27%20fill%3D%27%23FAD02C%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20512%20512%27%3E%3Crect%20width%3D%27512%27%20height%3D%27512%27%20rx%3D%27128%27%20fill%3D%27%237C5CFC%27%2F%3E%3Cpath%20d%3D%27M128%20140c36-12%2080-12%20128%2016v200c-48-28-92-28-128-16zm256%200c-36-12-80-12-128%2016v200c48-28%2092-28%20128-16z%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%2732%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%2F%3E%3Ccircle%20cx%3D%27256%27%20cy%3D%27110%27%20r%3D%2718%27%20fill%3D%27%23FAD02C%27%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%22%7D%5D%7D" />
+
+  <!-- App Icon Fallback -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%237C5CFC'/%3E%3Cpath d='M25 32c8-3 15-3 25 3v40c-10-6-17-6-25-3zm50 0c-8-3-15-3-25 3v40c10-6 17-6 25-3z' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='24' r='4' fill='%23FAD02C'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%237C5CFC'/%3E%3Cpath d='M25 32c8-3 15-3 25 3v40c-10-6-17-6-25-3zm50 0c-8-3-15-3-25 3v40c10-6 17-6 25-3z' fill='none' stroke='%23fff' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='24' r='4' fill='%23FAD02C'/%3E%3C/svg%3E" />
+
+  <style>
+    /* ==========================================================================
+       THEMING VARIABLES & CSS RESET
+       ========================================================================== */
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif: "Georgia", "Cambria", "Times New Roman", Times, serif;
+      --transition-speed: 0.25s;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-pill: 9999px;
+      --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.07);
+    }
+
+    /* THEME 1: PASTEL LIGHT (Default) */
+    [data-theme="pastel-light"] {
+      --bg-app: #F7F5FB;
+      --bg-surface: #FFFFFF;
+      --bg-surface-secondary: #F0EDF8;
+      --text-main: #242238;
+      --text-muted: #6B6783;
+      --text-accent: #7C5CFC;
+      --border-subtle: #E7E3F3;
+      --primary: #7C5CFC;
+      --primary-hover: #6945F0;
+      --primary-soft: #ECE8FD;
+      --vocab-highlight: #FDEED9;
+      --vocab-border: #F39C12;
+      --vocab-text: #9A5B02;
+      --success: #10B981;
+      --success-soft: #D1FAE5;
+      --error: #EF4444;
+      --error-soft: #FEE2E2;
+      --progress-color: #7C5CFC;
+    }
+
+    /* THEME 2: WARM SEPIA */
+    [data-theme="warm-sepia"] {
+      --bg-app: #F6EFE2;
+      --bg-surface: #FCF8F2;
+      --bg-surface-secondary: #EFE4D2;
+      --text-main: #3F3127;
+      --text-muted: #7E6B5D;
+      --text-accent: #A3572D;
+      --border-subtle: #E2D5C3;
+      --primary: #A3572D;
+      --primary-hover: #8D4720;
+      --primary-soft: #F5E8DC;
+      --vocab-highlight: #FFECC7;
+      --vocab-border: #D9822B;
+      --vocab-text: #8A4A0A;
+      --success: #2E7D32;
+      --success-soft: #E0F2E9;
+      --error: #C62828;
+      --error-soft: #FFEBEE;
+      --progress-color: #A3572D;
+    }
+
+    /* THEME 3: DARK AESTHETIC */
+    [data-theme="dark-aesthetic"] {
+      --bg-app: #12131A;
+      --bg-surface: #1B1C26;
+      --bg-surface-secondary: #252636;
+      --text-main: #EDEDF5;
+      --text-muted: #9597AC;
+      --text-accent: #9B82FD;
+      --border-subtle: #2C2D40;
+      --primary: #8F72FA;
+      --primary-hover: #A790FF;
+      --primary-soft: #2B2945;
+      --vocab-highlight: #3A2F1C;
+      --vocab-border: #F59E0B;
+      --vocab-text: #FCD34D;
+      --success: #10B981;
+      --success-soft: #064E3B;
+      --error: #F87171;
+      --error-soft: #450A0A;
+      --progress-color: #8F72FA;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-app);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar Aesthetics */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: var(--radius-pill);
+    }
+
+    /* ==========================================================================
+       PROGRESS BAR
+       ========================================================================== */
+    #reading-progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      display: none;
+    }
+    #reading-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--progress-color);
+      transition: width 0.1s ease-out;
+    }
+
+    /* ==========================================================================
+       APP HEADER & NAVIGATION
+       ========================================================================== */
+    header {
+      position: sticky;
+      top: 0;
+      background-color: var(--bg-surface);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 900;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background-color var(--transition-speed), border-color var(--transition-speed);
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .brand-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), #FF85B3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(124, 92, 252, 0.3);
+      flex-shrink: 0;
+    }
+    .brand-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      line-height: 1.2;
+    }
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-icon {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: all 0.2s;
+    }
+    .btn-icon:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    .offline-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: var(--radius-pill);
+      background: var(--success-soft);
+      color: var(--success);
+      border: 1px solid currentColor;
+      white-space: nowrap;
+    }
+    .offline-pill.is-offline {
+      background: #FEF3C7;
+      color: #B45309;
+    }
+
+    .btn-install {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 10px rgba(124, 92, 252, 0.25);
+      transition: transform 0.2s;
+      white-space: nowrap;
+    }
+    .btn-install:hover {
+      transform: scale(1.03);
+    }
+
+    /* ==========================================================================
+       MAIN CONTAINER & VIEWS
+       ========================================================================== */
+    main {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 20px 16px 80px;
+      min-height: calc(100vh - 70px);
+    }
+
+    .view {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .view.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==========================================================================
+       HOME VIEW (STORY CATALOG)
+       ========================================================================== */
+    .hero-banner {
+      background: linear-gradient(135deg, var(--bg-surface), var(--bg-surface-secondary));
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner::after {
+      content: "✨";
+      position: absolute;
+      right: 18px;
+      bottom: 12px;
+      font-size: 4rem;
+      opacity: 0.15;
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+    .hero-title {
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .hero-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      max-width: 520px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Story Card Grid */
+    .story-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .story-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .story-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-card);
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .genre-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .genre-slice {
+      background: #FFE4E6;
+      color: #BE123C;
+    }
+    .genre-mystery {
+      background: #E0E7FF;
+      color: #3730A3;
+    }
+    .genre-scifi {
+      background: #CFFAFE;
+      color: #0E7490;
+    }
+
+    .read-time {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .story-title {
+      font-size: 1.22rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .story-synopsis {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border-subtle);
+      font-size: 0.8rem;
+    }
+    .meta-items {
+      display: flex;
+      gap: 14px;
+      color: var(--text-muted);
+    }
+    .quiz-status {
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--text-muted);
+    }
+    .quiz-status.completed {
+      color: var(--success);
+    }
+
+    /* ==========================================================================
+       READER VIEW
+       ========================================================================== */
+    .reader-toolbar {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: var(--shadow-soft);
+    }
+    .reader-nav-back {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      transition: background 0.15s;
+    }
+    .reader-nav-back:hover {
+      background: var(--primary-soft);
+    }
+
+    .reading-customizers {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .control-pill {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-pill);
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .control-btn {
+      background: none;
+      border: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .control-btn:hover {
+      color: var(--primary);
+    }
+    .control-btn.active {
+      background: var(--bg-surface);
+      color: var(--primary);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Article Reader Content */
+    .reader-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 30px;
+      transition: font-size 0.2s ease;
+    }
+    @media (max-width: 600px) {
+      .reader-card {
+        padding: 24px 18px;
+      }
+    }
+
+    .reader-header {
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .reader-header .genre-badge {
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .reader-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .reader-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .vocab-hint-banner {
+      background: var(--primary-soft);
+      border-left: 4px solid var(--primary);
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      color: var(--text-main);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .story-body {
+      font-size: 1.1rem;
+      line-height: 1.75;
+      color: var(--text-main);
+    }
+    .story-body.font-serif {
+      font-family: var(--font-serif);
+    }
+    .story-body.font-sans {
+      font-family: var(--font-sans);
+    }
+    .story-body p {
+      margin-bottom: 1.4em;
+      text-indent: 0.5em;
+    }
+    .story-body p:first-of-type {
+      text-indent: 0;
+    }
+
+    /* Interactive Vocab Word inside text */
+    .vocab-word {
+      background-color: var(--vocab-highlight);
+      color: var(--vocab-text);
+      border-bottom: 2px dashed var(--vocab-border);
+      padding: 1px 4px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      display: inline;
+      transition: all 0.2s;
+    }
+    .vocab-word:hover {
+      background-color: var(--vocab-border);
+      color: #fff;
+      border-bottom-style: solid;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Bottom Action Tabs in Reader */
+    .reader-action-nav {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .action-tab-btn {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.2s;
+    }
+    .action-tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+    .action-tab-btn.highlight {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #fff;
+      border: none;
+    }
+
+    /* ==========================================================================
+       VOCABULARY LIST SECTION
+       ========================================================================== */
+    .vocab-section {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-top: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .vocab-card {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .vocab-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+    .vocab-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .vocab-card-word {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .vocab-card-pos {
+      font-size: 0.7rem;
+      font-style: italic;
+      color: var(--text-muted);
+      background: var(--bg-surface);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .vocab-card-meaning {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       QUIZ SECTION
+       ========================================================================== */
+    .quiz-section {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-top: 30px;
+      box-shadow: var(--shadow-card);
+    }
+    .quiz-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .quiz-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quiz-score-badge {
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .question-block {
+      margin-bottom: 26px;
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      transition: all 0.2s;
+    }
+    .question-num {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .question-text {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 14px;
+      line-height: 1.4;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .option-btn {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      text-align: left;
+      color: var(--text-main);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .option-key {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-surface-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* Option Selected States */
+    .option-btn.correct {
+      background: var(--success-soft) !important;
+      border-color: var(--success) !important;
+      color: var(--success) !important;
+      font-weight: 700;
+    }
+    .option-btn.correct .option-key {
+      background: var(--success);
+      color: #fff;
+      border-color: var(--success);
+    }
+    .option-btn.wrong {
+      background: var(--error-soft) !important;
+      border-color: var(--error) !important;
+      color: var(--error) !important;
+    }
+    .option-btn.wrong .option-key {
+      background: var(--error);
+      color: #fff;
+      border-color: var(--error);
+    }
+
+    .explanation-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      line-height: 1.45;
+      display: none;
+    }
+    .explanation-box.show {
+      display: block;
+    }
+    .explanation-box.correct {
+      background: var(--success-soft);
+      color: var(--success);
+      border-left: 3px solid var(--success);
+    }
+    .explanation-box.wrong {
+      background: var(--error-soft);
+      color: var(--error);
+      border-left: 3px solid var(--error);
+    }
+
+    .quiz-result-card {
+      display: none;
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, var(--bg-surface-secondary), var(--bg-surface));
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      margin-top: 20px;
+    }
+    .quiz-result-card.active {
+      display: block;
+      animation: popIn 0.3s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .result-emoji {
+      font-size: 3rem;
+      margin-bottom: 8px;
+    }
+    .result-score-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+    .result-comment {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .btn-reset-quiz {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(124, 92, 252, 0.3);
+    }
+
+    /* ==========================================================================
+       MODAL: VOCABULARY DETAIL DIALOG
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px 24px 0 0;
+      width: 100%;
+      max-width: 600px;
+      padding: 24px;
+      box-shadow: 0 -8px 40px rgba(0, 0, 0, 0.2);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    @media (min-width: 640px) {
+      .modal-backdrop {
+        align-items: center;
+      }
+      .modal-sheet {
+        border-radius: 20px;
+        transform: scale(0.95);
+        opacity: 0;
+        transition: transform 0.25s, opacity 0.25s;
+      }
+      .modal-backdrop.open .modal-sheet {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    .modal-backdrop.open .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .sheet-handle {
+      width: 40px;
+      height: 4px;
+      background: var(--border-subtle);
+      border-radius: var(--radius-pill);
+      margin: 0 auto 16px;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: var(--bg-surface-secondary);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-vocab-word {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .modal-vocab-phonetic {
+      font-size: 0.95rem;
+      color: var(--primary);
+      font-weight: 600;
+      font-family: monospace;
+      margin-bottom: 12px;
+    }
+    .modal-audio-btn {
+      background: var(--primary-soft);
+      border: none;
+      color: var(--primary);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.2s;
+    }
+    .modal-audio-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .modal-translation-box {
+      background: var(--bg-surface-secondary);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .modal-translation-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .modal-translation-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .modal-definition-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .modal-definition-text {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .modal-example-box {
+      border-left: 3px solid var(--primary);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+    .modal-example-text {
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .modal-btn-primary {
+      flex: 1;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* ==========================================================================
+       MODAL: SETTINGS & THEME CUSTOMIZER
+       ========================================================================== */
+    .settings-sheet {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+    .settings-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .settings-group {
+      margin-bottom: 20px;
+    }
+    .settings-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .theme-picker-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .theme-card-btn {
+      background: var(--bg-surface-secondary);
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .theme-card-btn.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .theme-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      margin: 0 auto 6px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+    }
+    .theme-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* iOS PWA Install Guide Modal */
+    .ios-guide-box {
+      background: var(--bg-surface-secondary);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #242238;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 3000;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      pointer-events: none;
+    }
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reading Progress Bar -->
+  <div id="reading-progress-container">
+    <div id="reading-progress-bar"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-group" id="btn-brand-home" title="Kembali ke Beranda">
+      <div class="brand-logo">📖</div>
+      <div>
+        <div class="brand-title">English Story App</div>
+        <div class="brand-subtitle">Teen Readers PWA</div>
+      </div>
+    </div>
+
+    <div class="header-actions">
+      <span class="offline-pill" id="offline-pill">
+        <span id="offline-dot">●</span>
+        <span id="offline-text">Offline Ready</span>
+      </span>
+
+      <button class="btn-install" id="btn-pwa-install" style="display: none;">
+        <span>📥</span> Install App
+      </button>
+
+      <button class="btn-icon" id="btn-open-settings" title="Pengaturan Tampilan & Tema">
+        🎨
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Views Container -->
+  <main>
+
+    <!-- VIEW 1: STORY CATALOG (HOME) -->
+    <section id="view-catalog" class="view active">
+      <div class="hero-banner">
+        <span class="hero-tag">🌟 YA & TEEN COLLECTION</span>
+        <h1 class="hero-title">Belajar Bahasa Inggris Lewat Cerita Penuh Makna</h1>
+        <p class="hero-desc">
+          Tingkatkan kosakata (Vocabulary) dan pemahaman teks (Reading Comprehension) dengan cerita pendek bertema remaja. 100% bisa dibaca tanpa kuota internet!
+        </p>
+      </div>
+
+      <div class="section-header">
+        <h2 class="section-title">
+          <span>📚</span> Pilih Cerita Hari Ini
+        </h2>
+        <span style="font-size: 0.8rem; color: var(--text-muted);" id="catalog-count">3 Cerita Tersedia</span>
+      </div>
+
+      <div class="story-grid" id="story-grid-container">
+        <!-- Story cards dynamically rendered by JS -->
+      </div>
+    </section>
+
+    <!-- VIEW 2: STORY READER -->
+    <section id="view-reader" class="view">
+      
+      <!-- Top Navigation & Controls Toolbar -->
+      <div class="reader-toolbar">
+        <button class="reader-nav-back" id="btn-reader-back">
+          ← Kembali ke Katalog
+        </button>
+
+        <div class="reading-customizers">
+          <!-- Font Size Adjustment -->
+          <div class="control-pill" title="Ukuran Huruf">
+            <button class="control-btn" id="btn-font-smaller">A-</button>
+            <span id="font-size-label" style="font-size: 0.75rem; font-weight: 700; padding: 0 4px;">18px</span>
+            <button class="control-btn" id="btn-font-larger">A+</button>
+          </div>
+
+          <!-- Font Type -->
+          <div class="control-pill" title="Gaya Font">
+            <button class="control-btn active" id="btn-font-serif">Serif</button>
+            <button class="control-btn" id="btn-font-sans">Sans</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Article Story Card -->
+      <article class="reader-card">
+        <div class="reader-header">
+          <span class="genre-badge" id="reader-genre">Genre</span>
+          <h1 class="reader-title" id="reader-title">Story Title</h1>
+          <div class="reader-subtitle">
+            <span id="reader-reading-time">⏱️ 3 min read</span>
+            <span>•</span>
+            <span id="reader-vocab-count">📖 8 Kosakata Interaktif</span>
+            <span>•</span>
+            <span id="reader-progress-percent">0% selesai</span>
+          </div>
+        </div>
+
+        <div class="vocab-hint-banner">
+          <span>💡</span>
+          <span><strong>Tips:</strong> Klik kata yang berwarna oranye bergaris putus-putus untuk mendengarkan pengucapan dan melihat artinya dalam Bahasa Indonesia!</span>
+        </div>
+
+        <!-- The actual story text with interactive vocab spans -->
+        <div class="story-body font-serif" id="reader-story-body">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Navigation Tabs Below Story -->
+        <div class="reader-action-nav">
+          <button class="action-tab-btn" id="btn-view-vocab-list">
+            <span>📝</span> Daftar Kosakata (<span id="vocab-btn-count">8</span>)
+          </button>
+          <button class="action-tab-btn highlight" id="btn-jump-quiz">
+            <span>✍️</span> Kerjakan Kuis Pemahaman
+          </button>
+        </div>
+      </article>
+
+      <!-- Vocabulary Drawer / List -->
+      <section class="vocab-section" id="vocab-section-block">
+        <div class="section-header">
+          <h3 class="section-title">
+            <span>📖</span> Kosakata Penting Cerita Ini
+          </h3>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Klik kata untuk detail lengkap</span>
+        </div>
+        <div class="vocab-grid" id="vocab-grid-container">
+          <!-- Populated by JavaScript -->
+        </div>
+      </section>
+
+      <!-- Quiz Section -->
+      <section class="quiz-section" id="quiz-section-block">
+        <div class="quiz-header">
+          <div class="quiz-title">
+            <span>🎯</span> Kuis Pemahaman Membaca
+          </div>
+          <div class="quiz-score-badge" id="quiz-score-badge">
+            Skor: 0 / 3
+          </div>
+        </div>
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 20px;">
+          Jawab 3 pertanyaan di bawah ini untuk menguji pemahamanmu terhadap alur cerita. Setiap jawaban dilengkapi penjelasan detail!
+        </p>
+
+        <div id="quiz-questions-container">
+          <!-- Populated by JavaScript -->
+        </div>
+
+        <!-- Quiz Completion Card -->
+        <div class="quiz-result-card" id="quiz-result-card">
+          <div class="result-emoji" id="result-emoji">🎉</div>
+          <div class="result-score-text" id="result-score-title">Skor Kamu: 3/3</div>
+          <div class="result-comment" id="result-comment">Pemahaman membaca kamu sangat luar biasa!</div>
+          <button class="btn-reset-quiz" id="btn-reset-quiz">
+            <span>🔄</span> Ulangi Kuis
+          </button>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+
+  <!-- VOCABULARY DETAIL MODAL -->
+  <div class="modal-backdrop" id="modal-vocab" role="dialog" aria-modal="true">
+    <div class="modal-sheet">
+      <div class="sheet-handle"></div>
+      <button class="modal-close-btn" id="btn-close-vocab-modal" title="Tutup">✕</button>
+      
+      <div class="modal-vocab-word">
+        <span id="modal-word-title">hesitant</span>
+        <button class="modal-audio-btn" id="modal-btn-speak" title="Dengarkan Pengucapan (Audio)">
+          🔊
+        </button>
+      </div>
+
+      <div class="modal-vocab-phonetic" id="modal-word-phonetic">[ˈhez.ə.tənt]</div>
+
+      <div class="modal-translation-box">
+        <div class="modal-translation-label">Arti Bahasa Indonesia</div>
+        <div class="modal-translation-text" id="modal-word-meaning">Ragu-ragu / Bimbang</div>
+      </div>
+
+      <div class="modal-definition-label">Definisi Bahasa Inggris</div>
+      <div class="modal-definition-text" id="modal-word-definition">
+        Tentative, unsure, or slow in acting or speaking because you feel uncertain.
+      </div>
+
+      <div class="modal-example-box">
+        <div class="modal-definition-label">Contoh Kalimat</div>
+        <div class="modal-example-text" id="modal-word-example">
+          "She felt hesitant before stepping onto the stage."
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn-primary" id="btn-modal-got-it">
+          ✓ Paham & Lanjutkan Membaca
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS & THEME MODAL -->
+  <div class="modal-backdrop" id="modal-settings" role="dialog" aria-modal="true">
+    <div class="settings-sheet">
+      <div class="settings-title">
+        <span>🎨 Kustomisasi Tampilan</span>
+        <button class="modal-close-btn" id="btn-close-settings-modal" style="position: static;">✕</button>
+      </div>
+
+      <!-- Theme Chooser -->
+      <div class="settings-group">
+        <span class="settings-label">Pilihan Tema Baca</span>
+        <div class="theme-picker-grid">
+          <button class="theme-card-btn active" data-set-theme="pastel-light">
+            <div class="theme-swatch" style="background: #F7F5FB; border-color: #7C5CFC;"></div>
+            <div class="theme-name">Pastel Light</div>
+          </button>
+          <button class="theme-card-btn" data-set-theme="warm-sepia">
+            <div class="theme-swatch" style="background: #F6EFE2; border-color: #A3572D;"></div>
+            <div class="theme-name">Warm Sepia</div>
+          </button>
+          <button class="theme-card-btn" data-set-theme="dark-aesthetic">
+            <div class="theme-swatch" style="background: #12131A; border-color: #8F72FA;"></div>
+            <div class="theme-name">Dark Aesthetic</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- PWA Installation Information -->
+      <div class="settings-group">
+        <span class="settings-label">Akses 100% Offline (PWA)</span>
+        <div class="ios-guide-box">
+          Aplikasi ini dirancang sebagai <strong>Progressive Web App</strong>. Anda bisa menyimpan aplikasi ini di layar utama (Add to Home Screen) di HP Android, iPhone/iPad, ataupun Desktop sehingga seluruh cerita dan kuis tetap bisa diakses tanpa sambungan internet.
+        </div>
+      </div>
+
+      <button class="modal-btn-primary" id="btn-close-settings-ok" style="width: 100%;">
+        Tutup
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast">
+    <span id="toast-icon">ℹ️</span>
+    <span id="toast-message">Pesan notifikasi</span>
+  </div>
+
+  <!-- ==========================================================================
+       VANILLA JAVASCRIPT ES6+ APPLICATION CORE
+       ========================================================================== -->
+  <script>
+    /* ==========================================================================
+       1. DATA KOLEKSI CERITA TEEN / YA
+       ========================================================================== */
+    const STORIES = [
+      {
+        id: "story-1",
+        title: "The Mural on Locker Row",
+        genre: "Slice of Life / School",
+        genreClass: "genre-slice",
+        readingTime: "3 min read",
+        synopsis: "Maya merasa gugup saat ditunjuk melukis dinding sekolah. Namun saat cat tak sengaja terciprat, sahabatnya Julian membantunya mengubah kesalahan itu menjadi karya seni yang keren dan seru!",
+        paragraphs: [
+          "Maya stood in front of the big empty wall at Maplewood High with a paintbrush in her hand. The annual school art festival was only two days away, and she had been chosen to paint the main wall. Still, she felt completely {hesitant}. Her friends knew about her habit of {perfectionism}—she always worried that even one small mistake would ruin the whole wall.",
+          "'Hey, if you keep staring at that wall all day, it might start talking back to you,' her best friend Julian laughed. He set a heavy box of acrylic paints down on the floor. Julian was the kind of friend who loved making a mess and having fun, wearing blue jeans that were already covered in bright colors.",
+          "Maya took a deep breath. 'I just want this to be a real {masterpiece}, Julian. What if nobody likes it? What if my ideas don't {resonate} with students walking down this hallway?' She dipped her brush into dark blue paint. But just then, someone slammed a locker nearby. The sudden loud bang made her jump, and paint {splattered} right across the clean white wall!",
+          "Maya dropped her brush in shock. 'Oh no! Look what I just did! I completely ruined it!' She felt like crying as she stared at the big messy spot.",
+          "Julian didn't panic at all. In fact, he smiled and leaned closer. 'Wait, don't freak out, Maya! Look at the shape! That's not a mistake at all—that's pure {serendipity}! To me, it looks like a cool wave in the ocean or the wing of a giant bird.'",
+          "He grabbed a sponge, dipped it into bright yellow and sky-blue paint, and softly blended the edges around the dark splash. Maya watched in surprise as the accidental blotch turned into something colorful and {vibrant}. All the stress in her chest melted away. She smiled, picked up her brush, and started painting with confidence.",
+          "For the next three hours, they worked together, adding stars, ocean waves, and city lights across the wall. When the afternoon school bell finally rang, Maya stepped back and let out a happy {exhale}. The mural wasn't what she had planned at first, but it looked amazing and full of life."
+        ],
+        vocabulary: [
+          {
+            word: "hesitant",
+            phonetic: "[ˈhez.ə.tənt]",
+            pos: "Adjective",
+            meaning: "Ragu-ragu / Bimbang",
+            definition: "Unsure, slow to act, or worried about what to do.",
+            example: "She was hesitant to ask the teacher for help, but she did it anyway."
+          },
+          {
+            word: "perfectionism",
+            phonetic: "[pər-ˈfek-shə-ˌni-zəm]",
+            pos: "Noun",
+            meaning: "Tuntutan kesempurnaan diri",
+            definition: "A desire to do everything without making any single mistake.",
+            example: "His perfectionism made him spend three hours writing a short email."
+          },
+          {
+            word: "vibrant",
+            phonetic: "[ˈvaɪ.brənt]",
+            pos: "Adjective",
+            meaning: "Penuh warna cerah & hidup",
+            definition: "Full of bright energy, lively colors, or excitement.",
+            example: "The room looked bright and vibrant with colorful birthday balloons."
+          },
+          {
+            word: "splattered",
+            phonetic: "[ˈsplæt̬.ɚd]",
+            pos: "Verb",
+            meaning: "Terciprat / Tercampur berantakan",
+            definition: "Splashed or dropped unevenly across a surface.",
+            example: "Some hot soup splattered onto my shirt while I was cooking."
+          },
+          {
+            word: "serendipity",
+            phonetic: "[ˌser.ənˈdɪp.ə.t̬i]",
+            pos: "Noun",
+            meaning: "Kebetulan baik yang menyenangkan",
+            definition: "Finding something good or lucky by happy accident.",
+            example: "Meeting my childhood best friend at the airport was pure serendipity."
+          },
+          {
+            word: "masterpiece",
+            phonetic: "[ˈmæs.tɚ.piːs]",
+            pos: "Noun",
+            meaning: "Mahakarya / Karya luar biasa",
+            definition: "An outstanding piece of work, art, or creative design.",
+            example: "My brother called his giant cheese sandwich a culinary masterpiece."
+          },
+          {
+            word: "resonate",
+            phonetic: "[ˈrez.ən.eɪt]",
+            pos: "Verb",
+            meaning: "Menyentuh perasaan / Berkesan di hati",
+            definition: "Connect emotionally or make sense to someone deeply.",
+            example: "The song's simple lyrics really resonate with a lot of teenagers."
+          },
+          {
+            word: "exhale",
+            phonetic: "[eksˈheɪl]",
+            pos: "Verb",
+            meaning: "Mengembuskan napas lega",
+            definition: "Breathe out air, often to relieve stress or relax.",
+            example: "After the difficult test was over, the students let out a loud exhale."
+          }
+        ],
+        quiz: [
+          {
+            question: "Why did Maya feel hesitant before starting her painting on the wall?",
+            options: [
+              "She forgot to bring her paint brushes from home.",
+              "Her habit of perfectionism made her worry about making a mistake.",
+              "Julian told her that her drawings were not good enough.",
+              "The hallway was too noisy for her to concentrate."
+            ],
+            correctIndex: 1,
+            explanation: "Maya merasa ragu-ragu karena sifat perfectionism (selalu ingin sempurna), sehingga ia takut membuat satu kesalahan kecil di dinding sekolah."
+          },
+          {
+            question: "What accident happened while Maya was holding the paintbrush?",
+            options: [
+              "Julian accidentally knocked over a bucket of water on the floor.",
+              "A locker slammed loudly, and dark blue paint splattered across the wall.",
+              "Her wooden paintbrush broke into two pieces.",
+              "She spilled cold coffee onto her shoes."
+            ],
+            correctIndex: 1,
+            explanation: "Saat seseorang membanting pintu loker, suara kerasnya mengagetkan Maya sehingga cat biru terciprat (splattered) ke dinding."
+          },
+          {
+            question: "How did Julian react when the paint spilled on the wall?",
+            options: [
+              "He got mad and told Maya to clean the whole wall right away.",
+              "He told her not to panic and saw it as serendipity that looked like a cool wave.",
+              "He laughed loudly and called the principal into the hallway.",
+              "He told Maya to give up and let someone else finish the wall."
+            ],
+            correctIndex: 1,
+            explanation: "Julian bersikap tenang dan optimis. Ia menganggap cipratan itu sebagai kebetulan yang indah (serendipity) untuk dijadikan ombak laut yang keren."
+          }
+        ]
+      },
+      {
+        id: "story-2",
+        title: "The Whispering Locker",
+        genre: "Mystery / School Life",
+        genreClass: "genre-mystery",
+        readingTime: "3 min read",
+        synopsis: "Loker nomor 73 di lorong tua sekolah selalu terkunci rapat. Saat Leo menemukan kunci peninggalan kakeknya, ia menemukan buku harian rahasia berisi misi kebaikan untuk teman-teman sekelasnya.",
+        paragraphs: [
+          "At Oakridge High, locker 73 was famous for being a mystery. It sat in an old basement hallway right next to the stairs, and it had been locked shut for years. Nobody in school knew who it belonged to. But one afternoon, while looking for a pen, Leo found a small, {tarnished} brass key hidden inside his grandfather's vintage backpack.",
+          "His grandfather had attended Oakridge forty years ago. Leo looked down the quiet, {solitary} hallway. All the classes were over, and most students had already gone home or gone to soccer practice. Feeling curious, Leo put the key into the lock and gently turned it. With a loud click, the door slowly opened.",
+          "Inside, there were no old math books or dusty gym shoes. Instead, Leo found a small, {peculiar} notebook tied with a bright red ribbon. He carefully sat down and turned to the first page. It was full of secret {cipher} text, alongside simple handwritten notes about helping people.",
+          "At the top of the page, a message said: 'Locker 73 is not for storing books. It is home to the Secret Helper Club—a {clandestine} group of friends who want to cheer people up whenever they feel down.'",
+          "Leo smiled, excited to read more. He spent twenty minutes trying to {decipher} the last coded message in the book. When he finally figured it out, the note said: 'The best kind of kindness is done in total {anonymity}, without asking for praise.'",
+          "Right under the note was an empty card that read: 'Mission #142: Make friends with the new student who always eats lunch alone by the tree.'",
+          "Leo immediately thought of Daniel, a new boy who had just moved to their town this week. Daniel looked shy and spent lunch hour by himself yesterday. Leo realized this wasn't a creepy ghost story; it was a {benevolent} tradition made to help students feel welcome.",
+          "Leo wrote a small smiley face in the corner of the card and closed the locker door. 'I can do this,' he whispered. Tomorrow at lunch, he was going to invite Daniel over to his table."
+        ],
+        vocabulary: [
+          {
+            word: "tarnished",
+            phonetic: "[ˈtɑːr.nɪʃt]",
+            pos: "Adjective",
+            meaning: "Kusam / Sedikit berkarat karena lama",
+            definition: "Losing shine or becoming dull over a long time.",
+            example: "My dad found a tarnished silver coin in the attic."
+          },
+          {
+            word: "solitary",
+            phonetic: "[ˈsɑː.lə.ter.i]",
+            pos: "Adjective",
+            meaning: "Sepi / Sendirian",
+            definition: "Being alone without any people around.",
+            example: "He likes taking a solitary walk in the park after school."
+          },
+          {
+            word: "peculiar",
+            phonetic: "[pɪˈkjuːl.jɚ]",
+            pos: "Adjective",
+            meaning: "Aneh / Unik & tidak biasa",
+            definition: "Strange, unusual, or curious in an interesting way.",
+            example: "There was a peculiar green light coming from the garage."
+          },
+          {
+            word: "cipher",
+            phonetic: "[ˈsaɪ.fɚ]",
+            pos: "Noun",
+            meaning: "Sandi rahasia / Kode pesan",
+            definition: "A secret way of writing letters using code or symbols.",
+            example: "My sister and I made up a secret cipher to write notes to each other."
+          },
+          {
+            word: "clandestine",
+            phonetic: "[klænˈdes.tɪn]",
+            pos: "Adjective",
+            meaning: "Dilakukan diam-diam / Rahasia",
+            definition: "Done in secret so that other people do not notice.",
+            example: "They had a clandestine meeting during lunch to plan a surprise party."
+          },
+          {
+            word: "decipher",
+            phonetic: "[dɪˈsaɪ.fɚ]",
+            pos: "Verb",
+            meaning: "Memecahkan kode / Membaca pesan rahasia",
+            definition: "Figure out the meaning of something difficult or written in code.",
+            example: "Can you help me decipher what the doctor wrote on this paper?"
+          },
+          {
+            word: "anonymity",
+            phonetic: "[ˌæn.əˈnɪm.ə.t̬i]",
+            pos: "Noun",
+            meaning: "Kerahasiaan nama / Tanpa menyebut nama",
+            definition: "The state of being unknown or keeping your identity private.",
+            example: "The person who donated books to our library wanted total anonymity."
+          },
+          {
+            word: "benevolent",
+            phonetic: "[bəˈnev.əl.ənt]",
+            pos: "Adjective",
+            meaning: "Penuh kebaikan hati / Berniat mulia",
+            definition: "Kind, generous, and caring about helping other people.",
+            example: "Our neighbor is a benevolent man who always shares fresh fruits from his garden."
+          }
+        ],
+        quiz: [
+          {
+            question: "Where did Leo find the key to locker 73?",
+            options: [
+              "Underneath a table in the school library.",
+              "Inside his grandfather's vintage school backpack.",
+              "On the grass near the school soccer field.",
+              "In his science teacher's desk drawer."
+            ],
+            correctIndex: 1,
+            explanation: "Leo menemukan kunci kuningan kusam tersebut di dalam tas ransel sekolah peninggalan kakeknya."
+          },
+          {
+            question: "What was written inside the secret notebook in the locker?",
+            options: [
+              "Answers to upcoming math and science exams.",
+              "Ideas and missions to help classmates through secret acts of kindness.",
+              "A list of rules made by the school principal.",
+              "Ghost stories written by former students forty years ago."
+            ],
+            correctIndex: 1,
+            explanation: "Buku catatan tersebut berisi misi rahasia klub untuk berbuat baik dan menyemangati teman sekolah yang sedang bersedih."
+          },
+          {
+            question: "What was Mission #142 that Leo decided to accept?",
+            options: [
+              "Make friends with Daniel, the new student who ate lunch alone.",
+              "Fix the broken clock in the school cafeteria.",
+              "Help clean up trash around the football field.",
+              "Return the key to the school office."
+            ],
+            correctIndex: 0,
+            explanation: "Misi ke-142 meminta anggota klub untuk menemani dan berteman dengan siswa baru yang duduk sendirian saat jam makan siang."
+          }
+        ]
+      },
+      {
+        id: "story-3",
+        title: "The Starlight Weaver",
+        genre: "Sci-Fi / Solarpunk",
+        genreClass: "genre-scifi",
+        readingTime: "3 min read",
+        synopsis: "Di kota terapung Zephyr, mekanik muda Lyra merawat kristal raksasa yang menyinari pulau-pulau di langit. Saat lampu kota mulai berkedip padam, ia menemukan rahasia tak terduga di dalam roda gigi mesin.",
+        paragraphs: [
+          "High up in the sky, above the clouds, was a peaceful group of floating islands called the {archipelago} of Zephyr. People lived in small houses with wind turbines, using small flying gliders to visit their neighbors. Sixteen-year-old Lyra worked as an apprentice mechanic at the central tower, helping take care of the giant {luminary} crystal that brought light to the entire city.",
+          "Everyone loved the crystal because its warm glow made the cold sky feel like home. But tonight, right before the big winter {solstice} festival, the light began to flicker. The bright golden glow became weak, and the streetlights along the bridges turned off one by one.",
+          "The older workers started running in circles. 'The main engine must be broken!' someone shouted. But Lyra stayed calm. She grabbed her tool bag and climbed up the metal ladder to check inside the machine. When she leaned in, her ears caught an {intricate} clicking noise that did not sound like normal machinery.",
+          "She looked between two brass gears and couldn't believe her eyes. Sitting inside was a tiny mechanical firefly! Its wings were made of thin glass, and it was blinking its light to a gentle, {celestial} rhythm, like a lullaby from outer space.",
+          "Lyra realized the little creature was not trying to cause trouble. It had gotten cold outside and was only looking for a warm {resonance} chamber near the crystal to charge its tiny battery. But because it was trapped between the gears, the big wheels couldn't turn smoothly.",
+          "'Hey little guy, it's okay. Don't worry,' Lyra whispered with a smile. Instead of using sharp metal tools, she pulled out a small whistle and played a soft note that matched the bug's humming sound. Then, she held out her open hand.",
+          "The firefly crawled onto her fingers happily, and she placed it safely into her warm jacket pocket. With the gears free again, the crystal lit up with a burst of power. Bright, {scintillating} golden beams spread across the sky, warming every street and rooftop in town.",
+          "All the clockwork gears started to {harmonize} smoothly again with a steady, quiet hum. Down in the square, people clapped and cheered. Inside Lyra's pocket, the firefly flashed its light twice to say thanks, and Lyra knew she had made an amazing new friend."
+        ],
+        vocabulary: [
+          {
+            word: "archipelago",
+            phonetic: "[ˌɑːr.kəˈpel.ə.ɡoʊ]",
+            pos: "Noun",
+            meaning: "Gugusan pulau / Kepulauan",
+            definition: "A group or chain of islands located close together.",
+            example: "We took a ferry ride to explore the tropical archipelago."
+          },
+          {
+            word: "luminary",
+            phonetic: "[ˈluː.mə.ner.i]",
+            pos: "Noun",
+            meaning: "Benda pemancar cahaya / Sumber terang",
+            definition: "An object that gives off light, like the sun, moon, or a beacon.",
+            example: "The full moon was the brightest luminary in the night sky."
+          },
+          {
+            word: "solstice",
+            phonetic: "[ˈsɑːl.stɪs]",
+            pos: "Noun",
+            meaning: "Titik balik matahari (hari terpanjang/terpendek)",
+            definition: "The day of the year with either the most or least daylight.",
+            example: "In winter, people stay warm by the fire during the winter solstice."
+          },
+          {
+            word: "intricate",
+            phonetic: "[ˈɪn.trə.kət]",
+            pos: "Adjective",
+            meaning: "Rumit / Penuh detail halus",
+            definition: "Having many small parts or details arranged in a complicated way.",
+            example: "The puzzle had an intricate pattern that took hours to complete."
+          },
+          {
+            word: "celestial",
+            phonetic: "[səˈles.tʃəl]",
+            pos: "Adjective",
+            meaning: "Langit / Terkait antariksa atau bintang",
+            definition: "Relating to the sky, stars, or outer space.",
+            example: "Planets and shooting stars are celestial wonders that we love to watch."
+          },
+          {
+            word: "resonance",
+            phonetic: "[ˈrez.ən.əns]",
+            pos: "Noun",
+            meaning: "Resonansi / Getaran suara selaras",
+            definition: "A sound or vibration that rings clearly and continues to echo.",
+            example: "The acoustic guitar created a beautiful resonance in the wooden hall."
+          },
+          {
+            word: "scintillating",
+            phonetic: "[ˈsɪn.təl.eɪ.t̬ɪŋ]",
+            pos: "Adjective",
+            meaning: "Berkilauan indah / Gemerlap",
+            definition: "Sparkling, shining, or flashing with bright light.",
+            example: "The diamond ring was scintillating under the jewelry store lights."
+          },
+          {
+            word: "harmonize",
+            phonetic: "[ˈhɑːr.mə.naɪz]",
+            pos: "Verb",
+            meaning: "Menyelaraskan / Berpadu serasi",
+            definition: "Work, sound, or fit together smoothly and in agreement.",
+            example: "The band members practiced hard so their instruments would harmonize."
+          }
+        ],
+        quiz: [
+          {
+            question: "Why was the giant luminary crystal important to the flying city of Zephyr?",
+            options: [
+              "It was only used as a decoration for the weekend party.",
+              "It brought warm light and kept the sky city glowing and safe.",
+              "It stored fresh drinking water for all the houses.",
+              "It played pop songs on the radio every morning."
+            ],
+            correctIndex: 1,
+            explanation: "Kristal tersebut berfungsi sebagai sumber cahaya utama (luminary) yang menerangi seluruh kota terapung agar tetap hangat dan aman."
+          },
+          {
+            question: "What was causing the crystal machine to stop working properly?",
+            options: [
+              "A wild bird built a nest inside the engine fans.",
+              "A tiny mechanical firefly was stuck inside the gears while looking for warmth.",
+              "Someone accidentally poured cold water into the fuel tank.",
+              "A heavy storm blew away the ladder."
+            ],
+            correctIndex: 1,
+            explanation: "Seekor kunang-kunang mekanis mungil terselip di sela roda gigi saat mencari tempat hangat untuk mengisi baterainya."
+          },
+          {
+            question: "How did Lyra rescue the firefly without hurting it?",
+            options: [
+              "She played a gentle tune that matched its sound and let it step onto her hand.",
+              "She grabbed it with heavy metal pliers.",
+              "She turned off the power grid for three whole days.",
+              "She sprayed soap water into the machine until the bug fell out."
+            ],
+            correctIndex: 0,
+            explanation: "Lyra membunyikan peluit dengan nada yang cocok dengan getaran si kunang-kunang, lalu membiarkannya merayap ke tangannya dengan ramah."
+          }
+        ]
+      }
+    ];
+
+    /* ==========================================================================
+       2. APP STATE MANAGEMENT & LOCAL STORAGE PERSISTENCE
+       ========================================================================== */
+    const APP_STORAGE_KEY = 'storyapp_user_prefs_v1';
+    
+    let appState = {
+      theme: 'pastel-light',
+      fontSize: 18,
+      fontFamily: 'serif',
+      currentStoryId: null,
+      quizAnswers: {}, // { [storyId]: [chosenIndex, ...] }
+      quizScores: {}   // { [storyId]: score }
+    };
+
+    // Load persisted state
+    function loadSavedState() {
+      try {
+        const saved = localStorage.getItem(APP_STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          appState = { ...appState, ...parsed };
+        }
+      } catch (e) {
+        console.warn('Could not read saved preferences from localStorage:', e);
+      }
+    }
+
+    // Save state
+    function saveAppState() {
+      try {
+        localStorage.setItem(APP_STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {
+        console.warn('Could not persist to localStorage:', e);
+      }
+    }
+
+    /* ==========================================================================
+       3. SYNTHETIC AUDIO ENGINE (Web Audio API)
+       Self-contained sound effects without external audio files (100% Offline)
+       ========================================================================== */
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Play cheerful chime on correct quiz answer or interaction
+    function playChimeSound(type = 'success') {
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+        const now = ctx.currentTime;
+
+        if (type === 'success') {
+          // Play a bright major chord triad: C5 (523Hz), E5 (659Hz), G5 (784Hz)
+          [523.25, 659.25, 783.99].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, now + i * 0.08);
+            gain.gain.setValueAtTime(0.12, now + i * 0.08);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.08 + 0.5);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + i * 0.08);
+            osc.stop(now + i * 0.08 + 0.55);
+          });
+        } else if (type === 'wrong') {
+          // Gentle warm double-tap for wrong answer (not jarring)
+          [280, 240].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq, now + i * 0.12);
+            gain.gain.setValueAtTime(0.15, now + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.12 + 0.25);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(now + i * 0.12);
+            osc.stop(now + i * 0.12 + 0.28);
+          });
+        } else if (type === 'click') {
+          // Minimalist bubble tap
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, now);
+          osc.frequency.exponentialRampToValueAtTime(300, now + 0.05);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 0.06);
+        }
+      } catch (err) {
+        // Audio may be blocked before first user gesture, fail silently
+      }
+    }
+
+    // Text to Speech for English Pronunciation
+    function speakEnglishWord(word) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Stop any pending utterance
+        const utterance = new SpeechSynthesisUtterance(word);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.85; // Slightly slower for language learners
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      } else {
+        showToast('Suara ucapan belum didukung di browser ini.', 'ℹ️');
+      }
+    }
+
+    /* ==========================================================================
+       4. TOAST NOTIFICATION
+       ========================================================================== */
+    let toastTimeout = null;
+    function showToast(message, icon = '✨') {
+      const toastEl = document.getElementById('toast');
+      const iconEl = document.getElementById('toast-icon');
+      const msgEl = document.getElementById('toast-message');
+      if (!toastEl) return;
+
+      iconEl.textContent = icon;
+      msgEl.textContent = message;
+      toastEl.classList.add('show');
+
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 3000);
+    }
+
+    /* ==========================================================================
+       5. THEME & CUSTOMIZATION CONTROLS
+       ========================================================================== */
+    function applyTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      appState.theme = themeName;
+      saveAppState();
+
+      // Update active state in theme modal buttons
+      document.querySelectorAll('.theme-card-btn').forEach(btn => {
+        if (btn.getAttribute('data-set-theme') === themeName) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    function applyFontSize(size) {
+      const clamped = Math.min(Math.max(size, 14), 26);
+      appState.fontSize = clamped;
+      saveAppState();
+
+      const storyBody = document.getElementById('reader-story-body');
+      if (storyBody) {
+        storyBody.style.fontSize = clamped + 'px';
+      }
+      const label = document.getElementById('font-size-label');
+      if (label) {
+        label.textContent = clamped + 'px';
+      }
+    }
+
+    function applyFontFamily(type) {
+      appState.fontFamily = type;
+      saveAppState();
+
+      const storyBody = document.getElementById('reader-story-body');
+      const btnSerif = document.getElementById('btn-font-serif');
+      const btnSans = document.getElementById('btn-font-sans');
+
+      if (storyBody) {
+        if (type === 'serif') {
+          storyBody.classList.remove('font-sans');
+          storyBody.classList.add('font-serif');
+          btnSerif.classList.add('active');
+          btnSans.classList.remove('active');
+        } else {
+          storyBody.classList.remove('font-serif');
+          storyBody.classList.add('font-sans');
+          btnSans.classList.add('active');
+          btnSerif.classList.remove('active');
+        }
+      }
+    }
+
+    /* ==========================================================================
+       6. RENDERING: CATALOG & STORIES
+       ========================================================================== */
+    function renderCatalog() {
+      const container = document.getElementById('story-grid-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      STORIES.forEach((story, idx) => {
+        const isCompleted = appState.quizScores[story.id] !== undefined;
+        const score = appState.quizScores[story.id] || 0;
+
+        const card = document.createElement('article');
+        card.className = 'story-card';
+        card.id = `story-card-${story.id}`;
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+
+        card.innerHTML = `
+          <div class="card-top">
+            <span class="genre-badge ${story.genreClass}">${story.genre}</span>
+            <span class="read-time">⏱️ ${story.readingTime}</span>
+          </div>
+
+          <h2 class="story-title">${story.title}</h2>
+          <p class="story-synopsis">${story.synopsis}</p>
+
+          <div class="card-meta">
+            <div class="meta-items">
+              <span>📖 ${story.vocabulary.length} Kosakata</span>
+              <span>•</span>
+              <span>🎯 ${story.quiz.length} Soal Kuis</span>
+            </div>
+            <div class="quiz-status ${isCompleted ? 'completed' : ''}">
+              ${isCompleted ? `✓ Kuis Selesai (${score}/${story.quiz.length})` : '⚪ Belum Dikerjakan'}
+            </div>
+          </div>
+        `;
+
+        card.addEventListener('click', () => {
+          playChimeSound('click');
+          openStoryReader(story.id);
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    /* ==========================================================================
+       7. RENDERING: STORY READER & INTERACTIVE VOCABULARY SPANS
+       ========================================================================== */
+    function openStoryReader(storyId) {
+      const story = STORIES.find(s => s.id === storyId);
+      if (!story) return;
+
+      appState.currentStoryId = storyId;
+      saveAppState();
+
+      // Update Reader UI elements
+      document.getElementById('reader-genre').textContent = story.genre;
+      document.getElementById('reader-genre').className = `genre-badge ${story.genreClass}`;
+      document.getElementById('reader-title').textContent = story.title;
+      document.getElementById('reader-reading-time').textContent = `⏱️ ${story.readingTime}`;
+      document.getElementById('reader-vocab-count').textContent = `📖 ${story.vocabulary.length} Kosakata Interaktif`;
+      document.getElementById('vocab-btn-count').textContent = story.vocabulary.length;
+
+      // Construct interactive story body
+      // Replaces {word} with interactive span `<span class="vocab-word" data-word="...">word</span>`
+      const storyBodyEl = document.getElementById('reader-story-body');
+      storyBodyEl.innerHTML = '';
+
+      story.paragraphs.forEach(para => {
+        const p = document.createElement('p');
+        // Replace {word} with span
+        const formatted = para.replace(/\{([a-zA-Z\-]+)\}/g, (match, word) => {
+          return `<span class="vocab-word" data-word="${word.toLowerCase()}">${word}</span>`;
+        });
+        p.innerHTML = formatted;
+        storyBodyEl.appendChild(p);
+      });
+
+      // Bind click on highlighted words in text
+      storyBodyEl.querySelectorAll('.vocab-word').forEach(span => {
+        span.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const wordText = span.getAttribute('data-word');
+          const vocabData = story.vocabulary.find(v => v.word.toLowerCase() === wordText.toLowerCase());
+          if (vocabData) {
+            playChimeSound('click');
+            openVocabModal(vocabData);
+          }
+        });
+      });
+
+      // Render Vocabulary Grid
+      renderVocabSection(story);
+
+      // Render Comprehension Quiz
+      renderQuizSection(story);
+
+      // Apply saved reading styles
+      applyFontSize(appState.fontSize);
+      applyFontFamily(appState.fontFamily);
+
+      // Switch view to Reader with smooth transition
+      switchView('reader');
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      updateReadingProgress();
+    }
+
+    /* Render Vocabulary Cards in Drawer Section */
+    function renderVocabSection(story) {
+      const grid = document.getElementById('vocab-grid-container');
+      if (!grid) return;
+      grid.innerHTML = '';
+
+      story.vocabulary.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'vocab-card';
+        card.innerHTML = `
+          <div class="vocab-card-header">
+            <span class="vocab-card-word">${item.word}</span>
+            <span class="vocab-card-pos">${item.pos}</span>
+          </div>
+          <div class="vocab-card-meaning">${item.meaning}</div>
+        `;
+        card.addEventListener('click', () => {
+          playChimeSound('click');
+          openVocabModal(item);
+        });
+        grid.appendChild(card);
+      });
+    }
+
+    /* ==========================================================================
+       8. VOCABULARY MODAL LOGIC
+       ========================================================================== */
+    let currentVocabModalWord = null;
+
+    function openVocabModal(vocabData) {
+      currentVocabModalWord = vocabData;
+
+      document.getElementById('modal-word-title').textContent = vocabData.word;
+      document.getElementById('modal-word-phonetic').textContent = vocabData.phonetic;
+      document.getElementById('modal-word-meaning').textContent = vocabData.meaning;
+      document.getElementById('modal-word-definition').textContent = vocabData.definition;
+      document.getElementById('modal-word-example').textContent = `"${vocabData.example}"`;
+
+      const modal = document.getElementById('modal-vocab');
+      modal.classList.add('open');
+
+      // Pronounce automatically on open for effortless listening
+      speakEnglishWord(vocabData.word);
+    }
+
+    function closeVocabModal() {
+      const modal = document.getElementById('modal-vocab');
+      modal.classList.remove('open');
+      currentVocabModalWord = null;
+    }
+
+    /* ==========================================================================
+       9. QUIZ LOGIC & IMMEDIATE EDUCATIONAL FEEDBACK
+       ========================================================================== */
+    function renderQuizSection(story) {
+      const container = document.getElementById('quiz-questions-container');
+      const scoreBadge = document.getElementById('quiz-score-badge');
+      const resultCard = document.getElementById('quiz-result-card');
+
+      if (!container) return;
+      container.innerHTML = '';
+      resultCard.classList.remove('active');
+
+      const userAnswers = appState.quizAnswers[story.id] || [];
+      let scoreCount = 0;
+      let answeredCount = 0;
+
+      story.quiz.forEach((q, qIndex) => {
+        const qBlock = document.createElement('div');
+        qBlock.className = 'question-block';
+        qBlock.id = `q-block-${qIndex}`;
+
+        const isAnswered = userAnswers[qIndex] !== undefined;
+        const selectedOption = userAnswers[qIndex];
+        if (isAnswered) {
+          answeredCount++;
+          if (selectedOption === q.correctIndex) scoreCount++;
+        }
+
+        qBlock.innerHTML = `
+          <div class="question-num">Pertanyaan ${qIndex + 1} dari ${story.quiz.length}</div>
+          <div class="question-text">${q.question}</div>
+          <div class="options-list" id="options-list-${qIndex}"></div>
+          <div class="explanation-box ${isAnswered ? 'show' : ''} ${isAnswered ? (selectedOption === q.correctIndex ? 'correct' : 'wrong') : ''}" id="explanation-${qIndex}">
+            <strong>${isAnswered ? (selectedOption === q.correctIndex ? '✓ Benar! ' : '✕ Kurang Tepat: ') : ''}</strong>
+            ${q.explanation}
+          </div>
+        `;
+
+        const optionsList = qBlock.querySelector(`#options-list-${qIndex}`);
+
+        q.options.forEach((optText, optIndex) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          const keyLetter = String.fromCharCode(65 + optIndex); // A, B, C, D
+
+          if (isAnswered) {
+            btn.disabled = true;
+            if (optIndex === q.correctIndex) {
+              btn.classList.add('correct');
+            } else if (optIndex === selectedOption) {
+              btn.classList.add('wrong');
+            }
+          }
+
+          btn.innerHTML = `
+            <span class="option-key">${keyLetter}</span>
+            <span>${optText}</span>
+          `;
+
+          btn.addEventListener('click', () => {
+            handleOptionSelect(story.id, qIndex, optIndex, q.correctIndex);
+          });
+
+          optionsList.appendChild(btn);
+        });
+
+        container.appendChild(qBlock);
+      });
+
+      // Update Score Badge
+      scoreBadge.textContent = `Skor: ${scoreCount} / ${story.quiz.length}`;
+
+      // If all answered, show result card
+      if (answeredCount === story.quiz.length) {
+        showQuizResult(scoreCount, story.quiz.length);
+      }
+    }
+
+    function handleOptionSelect(storyId, questionIndex, selectedOptionIndex, correctOptionIndex) {
+      if (!appState.quizAnswers[storyId]) {
+        appState.quizAnswers[storyId] = [];
+      }
+
+      // Record answer
+      appState.quizAnswers[storyId][questionIndex] = selectedOptionIndex;
+
+      // Play audio feedback
+      if (selectedOptionIndex === correctOptionIndex) {
+        playChimeSound('success');
+      } else {
+        playChimeSound('wrong');
+      }
+
+      // Re-render quiz to apply styling & explanations
+      const story = STORIES.find(s => s.id === storyId);
+      if (story) {
+        // Calculate score
+        let score = 0;
+        story.quiz.forEach((q, i) => {
+          if (appState.quizAnswers[storyId][i] === q.correctIndex) {
+            score++;
+          }
+        });
+        appState.quizScores[storyId] = score;
+        saveAppState();
+
+        renderQuizSection(story);
+        renderCatalog(); // Update catalog status tag
+      }
+    }
+
+    function showQuizResult(score, total) {
+      const resultCard = document.getElementById('quiz-result-card');
+      const emojiEl = document.getElementById('result-emoji');
+      const titleEl = document.getElementById('result-score-title');
+      const commentEl = document.getElementById('result-comment');
+
+      if (!resultCard) return;
+
+      titleEl.textContent = `Skor Kamu: ${score} / ${total}`;
+
+      if (score === total) {
+        emojiEl.textContent = '🌟';
+        commentEl.textContent = 'Luar biasa! Pemahaman membaca bahasa Inggris kamu sangat cemerlang!';
+      } else if (score >= 2) {
+        emojiEl.textContent = '👏';
+        commentEl.textContent = 'Bagus sekali! Hampir sempurna. Pertahankan semangat membacamu!';
+      } else {
+        emojiEl.textContent = '📖';
+        commentEl.textContent = 'Tetap semangat! Baca kembali ceritanya dan pelajari kosakata di atas untuk hasil yang lebih baik.';
+      }
+
+      resultCard.classList.add('active');
+    }
+
+    function resetQuiz(storyId) {
+      if (appState.quizAnswers[storyId]) {
+        delete appState.quizAnswers[storyId];
+      }
+      if (appState.quizScores[storyId] !== undefined) {
+        delete appState.quizScores[storyId];
+      }
+      saveAppState();
+
+      const story = STORIES.find(s => s.id === storyId);
+      if (story) {
+        renderQuizSection(story);
+        renderCatalog();
+        showToast('Kuis telah direset. Selamat mencoba kembali!', '🔄');
+      }
+    }
+
+    /* ==========================================================================
+       10. VIEW NAVIGATION (CATALOG vs READER)
+       ========================================================================== */
+    function switchView(viewName) {
+      const catalogView = document.getElementById('view-catalog');
+      const readerView = document.getElementById('view-reader');
+      const progressContainer = document.getElementById('reading-progress-container');
+
+      if (viewName === 'reader') {
+        catalogView.classList.remove('active');
+        readerView.classList.add('active');
+        if (progressContainer) progressContainer.style.display = 'block';
+      } else {
+        readerView.classList.remove('active');
+        catalogView.classList.add('active');
+        if (progressContainer) progressContainer.style.display = 'none';
+        appState.currentStoryId = null;
+        saveAppState();
+      }
+    }
+
+    /* ==========================================================================
+       11. SCROLL READING PROGRESS BAR
+       ========================================================================== */
+    function updateReadingProgress() {
+      const readerView = document.getElementById('view-reader');
+      if (!readerView || !readerView.classList.contains('active')) return;
+
+      const progressBar = document.getElementById('reading-progress-bar');
+      const progressPercentLabel = document.getElementById('reader-progress-percent');
+      
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+
+      if (docHeight <= 0) {
+        if (progressBar) progressBar.style.width = '100%';
+        if (progressPercentLabel) progressPercentLabel.textContent = '100% selesai';
+        return;
+      }
+
+      const progress = Math.min(Math.max((scrolled / docHeight) * 100, 0), 100);
+      if (progressBar) progressBar.style.width = `${progress}%`;
+      if (progressPercentLabel) progressPercentLabel.textContent = `${Math.round(progress)}% selesai`;
+    }
+
+    /* ==========================================================================
+       12. PROGRESSIVE WEB APP (PWA) OFFLINE SERVICE WORKER & INSTALL PROMPT
+       Inline Service Worker via Blob URL with complete offline fallback
+       ========================================================================== */
+    function registerOfflineServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        // Build inline Service Worker code
+        const swScript = `
+          const CACHE_NAME = 'storyapp-offline-v1';
+          const PRECACHE_URLS = [
+            self.location.href
+          ];
+
+          self.addEventListener('install', (event) => {
+            self.skipWaiting();
+            event.waitUntil(
+              caches.open(CACHE_NAME).then((cache) => {
+                return cache.addAll(PRECACHE_URLS).catch(() => {});
+              })
+            );
+          });
+
+          self.addEventListener('activate', (event) => {
+            event.waitUntil(
+              caches.keys().then((keys) => {
+                return Promise.all(
+                  keys.map((key) => {
+                    if (key !== CACHE_NAME) {
+                      return caches.delete(key);
+                    }
+                  })
+                );
+              }).then(() => self.clients.claim())
+            );
+          });
+
+          self.addEventListener('fetch', (event) => {
+            if (event.request.method !== 'GET') return;
+            event.respondWith(
+              caches.match(event.request).then((cachedResponse) => {
+                if (cachedResponse) {
+                  return cachedResponse;
+                }
+                return fetch(event.request)
+                  .then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200) {
+                      const responseClone = networkResponse.clone();
+                      caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, responseClone);
+                      });
+                    }
+                    return networkResponse;
+                  })
+                  .catch(() => {
+                    // Fallback to cached index for navigation
+                    if (event.request.mode === 'navigate') {
+                      return caches.match('/');
+                    }
+                  });
+              })
+            );
+          });
+        `;
+
+        try {
+          const blob = new Blob([swScript], { type: 'application/javascript' });
+          const swUrl = URL.createObjectURL(blob);
+          navigator.serviceWorker.register(swUrl)
+            .then(() => {
+              console.log('PWA Service Worker registered via Blob URL.');
+            })
+            .catch((err) => {
+              // Graceful fallback if blob registration is restricted in some environments
+              console.info('Service Worker registration note:', err.message);
+            });
+        } catch (e) {
+          console.info('Inline SW init note:', e);
+        }
+      }
+    }
+
+    // PWA Install Prompt & Connectivity Detection
+    let deferredPrompt = null;
+
+    function setupPWAInstallAndConnectivity() {
+      const installBtn = document.getElementById('btn-pwa-install');
+      const offlinePill = document.getElementById('offline-pill');
+      const offlineDot = document.getElementById('offline-dot');
+      const offlineText = document.getElementById('offline-text');
+
+      // Connectivity listeners
+      function updateOnlineStatus() {
+        if (navigator.onLine) {
+          offlinePill.classList.remove('is-offline');
+          offlineDot.textContent = '●';
+          offlineText.textContent = 'Offline Ready';
+        } else {
+          offlinePill.classList.add('is-offline');
+          offlineDot.textContent = '⚡';
+          offlineText.textContent = 'Mode Offline';
+          showToast('Koneksi internet terputus. Aplikasi tetap berfungsi 100% offline!', '⚡');
+        }
+      }
+
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+      updateOnlineStatus();
+
+      // Check if already running in standalone PWA mode
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+      if (!isStandalone) {
+        window.addEventListener('beforeinstallprompt', (e) => {
+          e.preventDefault();
+          deferredPrompt = e;
+          if (installBtn) installBtn.style.display = 'inline-flex';
+        });
+
+        window.addEventListener('appinstalled', () => {
+          deferredPrompt = null;
+          if (installBtn) installBtn.style.display = 'none';
+          showToast('Aplikasi berhasil dipasang di layar utama!', '🎉');
+        });
+
+        if (installBtn) {
+          installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+              deferredPrompt.prompt();
+              const { outcome } = await deferredPrompt.userChoice;
+              if (outcome === 'accepted') {
+                showToast('Terima kasih telah menginstal Story App!', '💖');
+              }
+              deferredPrompt = null;
+              installBtn.style.display = 'none';
+            } else {
+              // On iOS Safari where beforeinstallprompt is not supported
+              showToast('Buka menu browser dan pilih "Add to Home Screen" untuk install.', '📱');
+            }
+          });
+        }
+      }
+    }
+
+    /* ==========================================================================
+       13. EVENT LISTENERS INITIALIZATION
+       ========================================================================== */
+    function initializeEvents() {
+      // Header Home button
+      document.getElementById('btn-brand-home').addEventListener('click', () => {
+        playChimeSound('click');
+        switchView('catalog');
+      });
+
+      // Reader Back Button
+      document.getElementById('btn-reader-back').addEventListener('click', () => {
+        playChimeSound('click');
+        switchView('catalog');
+      });
+
+      // Jump to Quiz button in reader
+      document.getElementById('btn-jump-quiz').addEventListener('click', () => {
+        playChimeSound('click');
+        const quizSection = document.getElementById('quiz-section-block');
+        if (quizSection) {
+          quizSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      // View Vocab List button in reader
+      document.getElementById('btn-view-vocab-list').addEventListener('click', () => {
+        playChimeSound('click');
+        const vocabSection = document.getElementById('vocab-section-block');
+        if (vocabSection) {
+          vocabSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+
+      // Reset Quiz Button
+      document.getElementById('btn-reset-quiz').addEventListener('click', () => {
+        playChimeSound('click');
+        if (appState.currentStoryId) {
+          resetQuiz(appState.currentStoryId);
+        }
+      });
+
+      // Font size adjustment buttons
+      document.getElementById('btn-font-smaller').addEventListener('click', () => {
+        playChimeSound('click');
+        applyFontSize(appState.fontSize - 2);
+      });
+      document.getElementById('btn-font-larger').addEventListener('click', () => {
+        playChimeSound('click');
+        applyFontSize(appState.fontSize + 2);
+      });
+
+      // Font style buttons
+      document.getElementById('btn-font-serif').addEventListener('click', () => {
+        playChimeSound('click');
+        applyFontFamily('serif');
+      });
+      document.getElementById('btn-font-sans').addEventListener('click', () => {
+        playChimeSound('click');
+        applyFontFamily('sans');
+      });
+
+      // Vocab Modal Controls
+      document.getElementById('btn-close-vocab-modal').addEventListener('click', closeVocabModal);
+      document.getElementById('btn-modal-got-it').addEventListener('click', () => {
+        playChimeSound('click');
+        closeVocabModal();
+      });
+      document.getElementById('modal-vocab').addEventListener('click', (e) => {
+        if (e.target.id === 'modal-vocab') closeVocabModal();
+      });
+
+      // Audio pronounce button in modal
+      document.getElementById('modal-btn-speak').addEventListener('click', () => {
+        if (currentVocabModalWord) {
+          speakEnglishWord(currentVocabModalWord.word);
+        }
+      });
+
+      // Settings Modal Controls
+      const settingsModal = document.getElementById('modal-settings');
+      document.getElementById('btn-open-settings').addEventListener('click', () => {
+        playChimeSound('click');
+        settingsModal.classList.add('open');
+      });
+      document.getElementById('btn-close-settings-modal').addEventListener('click', () => {
+        settingsModal.classList.remove('open');
+      });
+      document.getElementById('btn-close-settings-ok').addEventListener('click', () => {
+        settingsModal.classList.remove('open');
+      });
+      settingsModal.addEventListener('click', (e) => {
+        if (e.target.id === 'modal-settings') settingsModal.classList.remove('open');
+      });
+
+      // Theme Picker buttons
+      document.querySelectorAll('.theme-card-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          playChimeSound('click');
+          const theme = btn.getAttribute('data-set-theme');
+          applyTheme(theme);
+          showToast(`Tema diubah ke ${btn.querySelector('.theme-name').textContent}`, '🎨');
+        });
+      });
+
+      // Scroll event for reading progress
+      window.addEventListener('scroll', updateReadingProgress, { passive: true });
+      window.addEventListener('resize', updateReadingProgress);
+    }
+
+    /* ==========================================================================
+       14. BOOTSTRAP APPLICATION
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      loadSavedState();
+      applyTheme(appState.theme || 'pastel-light');
+      applyFontSize(appState.fontSize || 18);
+      applyFontFamily(appState.fontFamily || 'serif');
+
+      renderCatalog();
+      initializeEvents();
+      registerOfflineServiceWorker();
+      setupPWAInstallAndConnectivity();
+
+      // If user had a previously opened story, restore it
+      if (appState.currentStoryId) {
+        const found = STORIES.find(s => s.id === appState.currentStoryId);
+        if (found) {
+          openStoryReader(found.id);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
